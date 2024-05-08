@@ -1,16 +1,14 @@
 import ImageCard from "../ImageCard/ImageCard";
+import css from "./ImageGallery.module.css";
 
 export default function ImageGallery({ photos }) {
-  //   console.log(photos);
   return (
-    <ul>
-      {photos.map((photo) => {
-        return (
-          <li key={photo.id}>
-            <ImageCard photo={photo} />
-          </li>
-        );
-      })}
+    <ul className={css.list}>
+      {photos.map((photo) => (
+        <li key={photo.id}>
+          <ImageCard photo={photo} />
+        </li>
+      ))}
     </ul>
   );
 }

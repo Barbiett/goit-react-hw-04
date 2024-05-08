@@ -1,4 +1,4 @@
-export default function LoadMoreBtn({ Onclick }) {
+export default function LoadMoreBtn({ onClick }) {
   return (
     <div
       style={{
@@ -6,7 +6,7 @@ export default function LoadMoreBtn({ Onclick }) {
         justifyContent: "center",
       }}
     >
-      <button onClick={Onclick}>Load More</button>
+      <button onClick={onClick}>Load More</button>
     </div>
   );
 }
