@@ -6,13 +6,33 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import * as Yup from "yup";
+
+// import ImageModal from "../ImageModal/ImageModal";
+// import Modal from "react-modal";
 export default function App() {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [showReset, setShowReset] = useState(false);
+  // ============= Modal Window.
 
+  // const [isMounted, setMounted] = useState(false);
+
+  // const [modalIsOpen, setIsOpen] = useState(false);
+  // const [modalData, setModalData] = useState(null);
+  // Modal.setAppElement("#root");
+
+  // function openModal(photo) {
+  //   setModalData(photo);
+  //   setIsOpen(true);
+  // }
+
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
+  // ====================
   const UserSchema = Yup.object().shape({
     query: Yup.string()
       .trim()
@@ -20,7 +40,12 @@ export default function App() {
       .max(50, "Max 50 letters!")
       .required("Is required"),
   });
+  function handleReset() {
+    setShowReset(false);
+    setPhotos([]);
+  }
   function handleSearch(newQuery) {
+    setShowReset(true);
     setQuery(newQuery);
     setPage(1);
     setPhotos([]);
@@ -54,7 +79,22 @@ export default function App() {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} UserSchema={UserSchema} />
+      {/* {modalIsOpen && modalData && (
+        <ImageModal
+          isModalOpen={modalIsOpen}
+          closeModal={closeModal}
+          modalData={modalData}
+          openModal={openModal}
+        />
+      )} */}
+
+      <SearchBar
+        onSearch={handleSearch}
+        UserSchema={UserSchema}
+        onClickReset={handleReset}
+        showReset={showReset}
+      />
+
       <ImageGallery photos={photos} />
       {isLoading && (
         <div
@@ -68,6 +108,7 @@ export default function App() {
         </div>
       )}
       {error && <ErrorMessage />}
+
       {photos.length > 0 && !isLoading && (
         <LoadMoreBtn onClick={handleLoadMore} />
       )}
