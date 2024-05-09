@@ -1,27 +1,28 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-// import toast, { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
 export default function SearchBar({
   onSearch,
-  UserSchema,
+  // UserSchema,
   onClickReset,
   showReset,
 }) {
-  // const notify = () => toast("Empty! Write something");
+  const notify = () => toast("Empty! Write something");
 
   return (
     <Formik
       initialValues={{ query: "" }}
       onSubmit={(values, actions) => {
-        // if (!values.query.trim()) {
-        //   notify();
-        // }
+        if (!values.query.trim()) {
+          notify();
+          return;
+        }
 
         onSearch(values.query);
         actions.resetForm();
       }}
-      validationSchema={UserSchema}
+      // validationSchema={UserSchema}
     >
       <Form className={css.form}>
         <ErrorMessage
@@ -49,7 +50,7 @@ export default function SearchBar({
             Reset
           </button>
         )}
-        {/* <Toaster
+        <Toaster
           toastOptions={{
             style: {
               background: "orangered",
@@ -58,7 +59,7 @@ export default function SearchBar({
               fontSize: "18px",
             },
           }}
-        /> */}
+        />
       </Form>
     </Formik>
   );

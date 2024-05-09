@@ -5,7 +5,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import ImageModal from "../ImageModal/ImageModal";
 import Modal from "react-modal";
 
@@ -32,13 +32,13 @@ export default function App() {
   }
 
   // ====================
-  const UserSchema = Yup.object().shape({
-    query: Yup.string()
-      .trim()
-      .min(3, "Too Short")
-      .max(50, "Max 50 letters!")
-      .required("Is required"),
-  });
+  // const UserSchema = Yup.object().shape({
+  //   query: Yup.string()
+  //     .trim()
+  //     .min(3, "Too Short")
+  //     .max(50, "Max 50 letters!")
+  //     .required("Is required"),
+  // });
   function handleReset() {
     setShowReset(false);
     setPhotos([]);
@@ -88,7 +88,7 @@ export default function App() {
 
       <SearchBar
         onSearch={handleSearch}
-        UserSchema={UserSchema}
+        // UserSchema={UserSchema}
         onClickReset={handleReset}
         showReset={showReset}
       />
