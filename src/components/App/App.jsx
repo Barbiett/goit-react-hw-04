@@ -6,9 +6,8 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import * as Yup from "yup";
-
-// import ImageModal from "../ImageModal/ImageModal";
-// import Modal from "react-modal";
+import ImageModal from "../ImageModal/ImageModal";
+import Modal from "react-modal";
 export default function App() {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
@@ -18,20 +17,19 @@ export default function App() {
   const [showReset, setShowReset] = useState(false);
   // ============= Modal Window.
 
-  // const [isMounted, setMounted] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
+  Modal.setAppElement("#root");
 
-  // const [modalIsOpen, setIsOpen] = useState(false);
-  // const [modalData, setModalData] = useState(null);
-  // Modal.setAppElement("#root");
+  function openModal(photo) {
+    setModalData(photo);
+    setModalIsOpen(true);
+  }
 
-  // function openModal(photo) {
-  //   setModalData(photo);
-  //   setIsOpen(true);
-  // }
+  function closeModal() {
+    setModalIsOpen(false);
+  }
 
-  // function closeModal() {
-  //   setIsOpen(false);
-  // }
   // ====================
   const UserSchema = Yup.object().shape({
     query: Yup.string()
@@ -79,14 +77,13 @@ export default function App() {
 
   return (
     <div>
-      {/* {modalIsOpen && modalData && (
+      {modalIsOpen && modalData && (
         <ImageModal
           isModalOpen={modalIsOpen}
-          closeModal={closeModal}
           modalData={modalData}
-          openModal={openModal}
+          closeModal={closeModal}
         />
-      )} */}
+      )}
 
       <SearchBar
         onSearch={handleSearch}
@@ -95,7 +92,7 @@ export default function App() {
         showReset={showReset}
       />
 
-      <ImageGallery photos={photos} />
+      <ImageGallery photos={photos} openModal={openModal} />
       {isLoading && (
         <div
           style={{
