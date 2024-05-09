@@ -8,6 +8,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import * as Yup from "yup";
 import ImageModal from "../ImageModal/ImageModal";
 import Modal from "react-modal";
+
 export default function App() {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
@@ -19,8 +20,8 @@ export default function App() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
-  Modal.setAppElement("#root");
 
+  Modal.setAppElement("#root");
   function openModal(photo) {
     setModalData(photo);
     setModalIsOpen(true);
@@ -77,7 +78,7 @@ export default function App() {
 
   return (
     <div>
-      {modalIsOpen && modalData && (
+      {modalIsOpen && setPhotos && (
         <ImageModal
           isModalOpen={modalIsOpen}
           modalData={modalData}
