@@ -78,7 +78,7 @@ export default function App() {
 
   return (
     <div>
-      {modalIsOpen && setPhotos && (
+      {modalIsOpen && (
         <ImageModal
           isModalOpen={modalIsOpen}
           modalData={modalData}
@@ -113,3 +113,6 @@ export default function App() {
     </div>
   );
 }
+// Функція setPhotos використовується в умовному операторі рендеру,
+//  що не є призначенням цієї функції.
+// Функція setPhotos має оновлювати стан, а не використовуватися як умова для рендеру.
