@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import ReactModal from "react-modal";
 
 export default function ImageModal({
@@ -6,20 +5,6 @@ export default function ImageModal({
   closeModal,
   isModalOpen,
 }) {
-  useEffect(() => {
-    function handleKeyDown(e) {
-      if (e.key === "Escape") {
-        closeModal(false);
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown, true);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [closeModal]);
-
   const custom = {
     content: {
       top: "50%",
